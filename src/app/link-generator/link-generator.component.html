@@ -1,0 +1,54 @@
+<mat-toolbar>
+
+    <mat-toolbar-row>
+        <span>QRLinkGenerator</span>
+        <span class="spacer"></span>
+        <a routerLink="/login">Sign-out</a>
+
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+<!--The content below is only a placeholder and can be replaced.-->
+  <form [formGroup]="form" (ngSubmit)="onGenerate()" class="container">
+    <mat-form-field>
+      <input formControlName="collection" [(ngModel)]="collection" matInput placeholder="Collection Name">
+    </mat-form-field>
+  
+    <ng-container *ngFor="let validation of validation_messages.collection">
+      <mat-error
+        *ngIf="form.get('collection').hasError(validation.type) && (form.get('collection').dirty || form.get('collection').touched)">
+        {{ validation.message }}
+      </mat-error>
+    </ng-container>
+  
+    <mat-form-field>
+      <input formControlName="prefix" type="text" [(ngModel)]="prefix" matInput placeholder="URL Prefix" />
+    </mat-form-field>
+  
+  
+    <ng-container *ngFor="let validation of validation_messages.prefix">
+      <mat-error
+        *ngIf="form.get('prefix').hasError(validation.type) && (form.get('prefix').dirty || form.get('prefix').touched)">
+        {{ validation.message }}
+      </mat-error>
+    </ng-container>
+  
+    <mat-form-field>
+      <input formControlName="nooflinks" type="number" [(ngModel)]="nooflinks" matInput placeholder="Number of Links" />
+    </mat-form-field>
+  
+    <ng-container *ngFor="let validation of validation_messages.nooflinks">
+      <mat-error
+        *ngIf="form.get('nooflinks').hasError(validation.type) && (form.get('nooflinks').dirty || form.get('nooflinks').touched)">
+        {{ validation.message }}
+      </mat-error>
+    </ng-container>
+  
+    <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Generate</button>
+  </form>
+  
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let locationqrcode of locationqrcodes | async">
+      {{locationqrcode.text}}
+    </a>
+  </mat-nav-list>

@@ -1,0 +1,29 @@
+<div class="page">
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSignin()" class="container">
+        <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+          <ng-container *ngFor="let validation of validation_messages.username">
+            <mat-error
+              *ngIf="form.get('username').hasError(validation.type) && (form.get('username').dirty || form.get('username').touched)">
+              {{ validation.message }}
+            </mat-error>
+          </ng-container>
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+          </mat-form-field>
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <mat-error
+              *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+              {{ validation.message }}
+            </mat-error>
+          </ng-container>
+          <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Sign-in</button>      
+          
+          <mat-error *ngIf="signInMessage" class="signInMessage">
+          {{ signInMessage }}
+        </mat-error>
+    </form>
+  </div>
+</div>
