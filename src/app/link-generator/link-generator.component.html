@@ -49,6 +49,6 @@
   
   <mat-nav-list>
     <a mat-list-item *ngFor="let locationqrcode of locationqrcodes | async">
-      {{locationqrcode.text}}
+      {{ this.prefix+'/'+locationqrcode.text}}
     </a>
   </mat-nav-list>

@@ -53,7 +53,6 @@ export class LinkGeneratorComponent {
 
     for (let count=0; count<this.nooflinks; count++) {
       this.locationqrcodesCollection.add({
-        url: prefixClean,
         text: uuid.v4()
       });
     }
