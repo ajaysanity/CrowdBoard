@@ -40,7 +40,35 @@ export class LinkGeneratorComponent {
     });
   }
 
-  onGenerate(){
+  checkIfExist(code){
+  
+      return new Promise((resolve, reject)=>{
+
+        this.db.collection('table_qr',ref=>{
+          return ref
+          .where('text','==',code)
+        }).valueChanges().subscribe(values=>{
+
+          if(values.length > 0){
+            resolve(true)
+          }
+          else{
+            resolve(false)
+          }
+
+        })
+      })
+  }
+
+  async onGenerate(){
+
+
+
+
+
+
+     // ------------------------ 
+
 
 
     let prefixClean = this.prefix.trim();
@@ -48,12 +76,59 @@ export class LinkGeneratorComponent {
       alert("Invalid input");
     }
 
-    this.locationqrcodesCollection = this.db.collection(this.collection);
-    this.locationqrcodes = this.locationqrcodesCollection.valueChanges();    
+
+    this.locationqrcodesCollection = await this.db.collection(this.collection);
+    this.locationqrcodes = await this.locationqrcodesCollection.valueChanges();    
 
     for (let count=0; count<this.nooflinks; count++) {
-      this.locationqrcodesCollection.add({
-        text: uuid.v4()
+
+      let code = this.prefix+uuid.v4()
+      let x = true
+
+      while(x){
+        await this.checkIfExist(code).then(data=>{
+          console.log(data)
+          if(data){
+            code = this.prefix+uuid.v4()
+          }
+          else{
+            x = false
+            return
+          }
+        })
+      }
+      
+      
+      // let code = this.prefix+uuid.v4()
+      // let x = true
+      // await this.locationqrcodesCollection.add({
+      //   text: code,
+      //   used: false
+      // });
+
+      // while(x){
+      //   await this.db.collection('table_qr',ref=>{
+      //     return ref
+      //     .where('text','==',code)
+      //   }).valueChanges().subscribe(values=>{
+        
+      //     if(values.length > 0){
+      //       code = this.prefix+uuid.v4()
+      //     }
+      //     else{
+      //       x = false
+      //       return
+      //     }
+
+      //   })
+      //   console.log("yasuidyuiasyudi")
+      // }
+
+
+
+      await this.locationqrcodesCollection.add({
+        text: code,
+        used: false
       });
     }
   }
