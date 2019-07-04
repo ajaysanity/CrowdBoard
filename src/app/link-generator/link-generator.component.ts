@@ -15,6 +15,7 @@ export class LinkGeneratorComponent {
   locationqrcodesCollection: AngularFirestoreCollection;
   locationqrcodes: Observable<any[]>;
   collection = "";
+  qr_codes = []
 
   form : FormGroup;
   validation_messages = {
@@ -63,14 +64,6 @@ export class LinkGeneratorComponent {
   async onGenerate(){
 
 
-
-
-
-
-     // ------------------------ 
-
-
-
     let prefixClean = this.prefix.trim();
     if (prefixClean.length == 0 || this.nooflinks < 1){
       alert("Invalid input");
@@ -82,14 +75,14 @@ export class LinkGeneratorComponent {
 
     for (let count=0; count<this.nooflinks; count++) {
 
-      let code = this.prefix+uuid.v4()
+      let code = this.prefix+"/"+uuid.v4()
       let x = true
 
       while(x){
         await this.checkIfExist(code).then(data=>{
           console.log(data)
           if(data){
-            code = this.prefix+uuid.v4()
+            code = this.prefix+"/"+uuid.v4()
           }
           else{
             x = false
@@ -98,6 +91,7 @@ export class LinkGeneratorComponent {
         })
       }
       
+      this.qr_codes.push(code)
       
       // let code = this.prefix+uuid.v4()
       // let x = true
@@ -130,6 +124,9 @@ export class LinkGeneratorComponent {
         text: code,
         used: false
       });
+
+
     }
+
   }
 }

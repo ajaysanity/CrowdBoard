@@ -47,8 +47,22 @@
     <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Generate</button>
   </form>
   
-  <mat-nav-list>
+<!--   <mat-nav-list>
     <a mat-list-item *ngFor="let locationqrcode of locationqrcodes | async">
       {{ this.prefix+'/'+locationqrcode.text}}
     </a>
-  </mat-nav-list>
+  </mat-nav-list> -->
+
+<mat-list>
+ <mat-list-item *ngFor="let code of qr_codes"> {{ code }} </mat-list-item>
+</mat-list>
+
+<mat-list>
+  
+  <mat-list-item *ngFor="let code of qr_codes" style="height: 300px">
+    
+    <qrcode [qrdata]="code" [level]="'M'"></qrcode>
+
+  </mat-list-item>
+
+</mat-list>

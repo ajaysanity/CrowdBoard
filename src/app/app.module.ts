@@ -14,6 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginComponent } from './login/login.component';
 import { LinkGeneratorComponent } from './link-generator/link-generator.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LinkGeneratorComponent } from './link-generator/link-generator.componen
     MatButtonModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
