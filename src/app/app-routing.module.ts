@@ -5,7 +5,7 @@ import {LinkGeneratorComponent} from './link-generator/link-generator.component'
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LinkGeneratorComponent },
   { path: 'login', component: LoginComponent },
   { path: 'linkgenerator', component: LinkGeneratorComponent }
 ];

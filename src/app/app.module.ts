@@ -1,3 +1,4 @@
+import { QrService } from './services/qr.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,6 +16,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoginComponent } from './login/login.component';
 import { LinkGeneratorComponent } from './link-generator/link-generator.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { CommonModule } from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -25,10 +30,15 @@ import { QRCodeModule } from 'angularx-qrcode';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ToastrModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    NgxPrintModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
@@ -36,7 +46,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatToolbarModule,
     QRCodeModule
   ],
-  providers: [],
+  providers: [QrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

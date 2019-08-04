@@ -7,3 +7,49 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.mysidebar{
+  background-color: #272934;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif; 
+  min-width: 270px;
+  min-height: 100vh !important;
+  height: 100% !important;
+}
+
+.qr-card{
+  color:white;
+}
+
+.logo{
+  height: 100px;
+  width: auto;
+}
+
+.logout{
+  color: white;
+  opacity: 0.8 !important;
+}
+
+.print{
+  opacity: 0.8;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; 
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; 
+}
+
+.ng-untouched{
+  border-left: none !important;
+}
+
+.generate-button{
+  background-color: #005489;
+}
+.validation-error{
+  color:#9F3B3A;
+}
