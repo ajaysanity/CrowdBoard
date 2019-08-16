@@ -15,6 +15,7 @@ export class LinkGeneratorComponent implements OnInit {
   ngOnInit() {
 
   }
+  CollectionType: any[] = ["_qr_table"];
   QrData = this.qrService.QrFormData;
   prefix = "";
   nooflinks = 1;
@@ -45,20 +46,16 @@ export class LinkGeneratorComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let FormValue = form.value;
+    let counter = FormValue.QrQuantity
     if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null) {
-      this.onGenerate(FormValue.QrQuantity, FormValue.urlPrefix,form).then(() => {
-        setTimeout(() => {
-          this.formHammer(form)
-        }, 1200)
+      for (let i=0; i<= counter; i++ ){
+        this.qrService.httpCreateTable(form)
         this.qrService.SuccessToast("Success", `${FormValue.QrQuantity} Successfully Added`)
-      }).catch(err => {
-        this.qrService.FailedToast("Failed", err)
-      });
+      }
     } else if (FormValue.QrQuantity < 1) {
       this.qrService.FailedToast("Failed", "Invalid Number")
     } else {
       this.qrService.FailedToast("Failed", "Form not Completed")
-
     }
 
   }
@@ -67,57 +64,10 @@ export class LinkGeneratorComponent implements OnInit {
   formHammer(form?: NgForm) {
     form.resetForm()
     this.QrData = {
+      collectionName: '',
       urlPrefix: '',
       QrQuantity: null,
       used: false
     }
-  }
-  checkIfExist(code) {
-    return new Promise((resolve, reject) => {
-      this.db.collection('table_qr', ref => {
-        return ref
-          .where('text', '==', code)
-      }).valueChanges()
-        .subscribe(values => {
-
-          if (values.length > 0) {
-            resolve(true)
-          }
-          else {
-            resolve(false)
-          }
-
-        })
-    })
-  }
-
-  async onGenerate(quantity: number, urlPrefix?: string, form?: NgForm) {
-
-    // this.locationqrcodesCollection = await this.db.collection(this.collection);
-    // this.locationqrcodes = await this.locationqrcodesCollection.valueChanges();    
-    for (let count = 0; count < quantity; count++) {
-      let code = uuid.v4()
-      let x = true
-
-      while (x) {
-
-        await this.checkIfExist(code).then(data => {
-          console.log(data)
-          if (data) {
-
-            code = uuid.v4()
-          }
-          else {
-            x = false
-            return
-          }
-        })
-      }
-      code = `${urlPrefix}/${code}`
-      this.qr_codes.push(code)
-      this.qrService.httpCreateTable(form)
-      console.log("Success");
-    }
-
   }
 }

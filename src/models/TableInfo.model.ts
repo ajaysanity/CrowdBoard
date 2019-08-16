@@ -3,6 +3,7 @@ export interface TableInfo{
     TableNumber: number,
 }
 export interface QrInfo{
+    collectionName: string,
     urlPrefix: string,
     QrQuantity: number,
     used: boolean

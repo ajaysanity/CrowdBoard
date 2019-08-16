@@ -1,3 +1,52 @@
+<!-- <mat-toolbar>
+
+    <mat-toolbar-row>
+        <span>QRLinkGenerator</span>
+        <span class="spacer"></span>
+        <a routerLink="/login">Sign-out</a>
+      </mat-toolbar-row>
+  </mat-toolbar> -->
+
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <form [formGroup]="form" (ngSubmit)="onGenerate()" class="container">
+  
+    <mat-form-field>
+      <input formControlName="nooflinks" type="number" [(ngModel)]="nooflinks" matInput placeholder="Number of Links" />
+    </mat-form-field>
+  
+    <ng-container *ngFor="let validation of validation_messages.nooflinks">
+      <mat-error
+        *ngIf="form.get('nooflinks').hasError(validation.type) && (form.get('nooflinks').dirty || form.get('nooflinks').touched)">
+        {{ validation.message }}
+      </mat-error>
+    </ng-container>
+  
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid" >Generate</button>
+  </form>
+   -->
+<!--   <mat-nav-list>
+    <a mat-list-item *ngFor="let locationqrcode of locationqrcodes | async">
+      {{ this.prefix+'/'+locationqrcode.text}}
+    </a>
+  </mat-nav-list> -->
+
+<!-- 
+<mat-list>
+  <mat-list-item *ngIf="isMain">
+      <h3>Main Qr</h3>
+
+    <qrcode [qrdata]="mainCode" [level]="'M'"></qrcode>
+    {{mainCode}}
+  </mat-list-item>
+  <mat-list-item *ngFor="let code of qr_codes" style="height: 300px">
+    <h6>Table Qr</h6>
+    {{code}}
+    <qrcode [qrdata]="code" [level]="'M'"></qrcode>
+
+  </mat-list-item>
+
+</mat-list> -->
+
 <!-- container -->
 <div class="container-fluid">
   <div class="row">
@@ -8,19 +57,29 @@
       <small>Crowd Connect</small>
       <h5>QR Generator</h5>
       <div class="row d-flex h-100 justify-content-center ">
+
         <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <div class="form-group mt-5 p-3 col-12 d-flex flex-wrap">
+            <label>Database</label>
+            <select class="form-control" name="Type" #Type="ngModel" [ngModel]="QrData?.collectionName">
+              <option *ngFor="let item of CollectionType" [value]="item">
+                {{ item }}</option>
+            </select>
+          </div>
+          <div class="form-group p-3 col-12 d-flex flex-wrap">
             <label>Url Prefix</label>
-            <input class="form-control form-control-sm w-100" name="urlPrefix" #urlPrefix="ngModel" [ngModel]="QrData?.urlPrefix"
-              placeholder="" required>
-              <div *ngIf="urlPrefix.invalid && urlPrefix.touched" class="validation-error"><small>This field is Required </small></div>
+            <input class="form-control form-control-sm w-100" name="urlPrefix" #urlPrefix="ngModel"
+              [ngModel]="QrData?.urlPrefix" placeholder="" required>
+            <div *ngIf="urlPrefix.invalid && urlPrefix.touched" class="validation-error"><small>This field is Required
+              </small></div>
           </div>
 
           <div class="form-group pl-3 pr-3 col-12 d-flex flex-wrap">
             <label>Number of QR</label>
-            <input type="number" min="1"  name="QrQuantity" #qrQuantity="ngModel" [ngModel]="QrData?.QrQuantity"
+            <input type="number" min="1" name="QrQuantity" #qrQuantity="ngModel" [ngModel]="QrData?.QrQuantity"
               class="form-control form-control-sm w-100" placeholder="" required>
-              <div *ngIf="qrQuantity.invalid && qrQuantity.touched" class="validation-error"><small>This field is Required </small></div>
+            <div *ngIf="qrQuantity.invalid && qrQuantity.touched" class="validation-error"><small>This field is Required
+              </small></div>
 
           </div>
           <button class="btn btn-dark w-75 mt-5 mb-5 btn-md generate-button"> Generate</button>
