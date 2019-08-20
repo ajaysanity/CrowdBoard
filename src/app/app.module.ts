@@ -9,23 +9,29 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './login/login.component';
 import { LinkGeneratorComponent } from './link-generator/link-generator.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CommonModule } from '@angular/common';
-import {ToastrModule} from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import {NgxPrintModule} from 'ngx-print';
+import { NgxPrintModule } from 'ngx-print';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LinkGeneratorComponent
+    LinkGeneratorComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +39,7 @@ import {NgxPrintModule} from 'ngx-print';
     ToastrModule,
     CommonModule,
     FormsModule,
+    AngularFireAuthModule,
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
@@ -40,13 +47,17 @@ import {NgxPrintModule} from 'ngx-print';
     AngularFirestoreModule,
     NgxPrintModule,
     BrowserAnimationsModule,
+    AngularFireFunctionsModule,
     MatButtonModule,
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    QRCodeModule
+    QRCodeModule,
+    NgxSpinnerModule
   ],
-  providers: [QrService],
+  providers: [QrService, AngularFireAuth, AngularFireAuthGuard,
+     { provide: FUNCTIONS_ORIGIN, useValue: 'https://us-central1-crowdconnect2.cloudfunctions.net' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

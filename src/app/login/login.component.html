@@ -1,29 +1,40 @@
-<div class="page">
-  <div class="container">
-    <form [formGroup]="form" (ngSubmit)="onSignin()" class="container">
-        <mat-form-field>
-            <input matInput placeholder="Username" formControlName="username">
-          </mat-form-field>
-          <ng-container *ngFor="let validation of validation_messages.username">
-            <mat-error
-              *ngIf="form.get('username').hasError(validation.type) && (form.get('username').dirty || form.get('username').touched)">
-              {{ validation.message }}
-            </mat-error>
-          </ng-container>
-          <mat-form-field>
-            <input matInput placeholder="Password" type="password" formControlName="password">
-          </mat-form-field>
-          <ng-container *ngFor="let validation of validation_messages.password">
-            <mat-error
-              *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
-              {{ validation.message }}
-            </mat-error>
-          </ng-container>
-          <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Sign-in</button>      
-          
-          <mat-error *ngIf="signInMessage" class="signInMessage">
-          {{ signInMessage }}
-        </mat-error>
-    </form>
+<div class="container-fluid main-page">
+  <div class="row h-100">
+    <div class="col-12 d-flex justify-content-center align-items-center flex-column main-form mb-5">
+      <img src="../assets/crowd-connect.png" class="main-logo">
+      <h5>Crowd Connect</h5>
+
+      <div class="row">
+          <form #form="ngForm" autocomplete="off" (submit)="onSignin(form)">
+              <div class="form-group col-12 mt-4">
+                <label>Email</label>
+                <input class="form-control mt-2" name="email" #email="ngModel" [ngModel]="loginData?.email" required>
+                <div *ngIf="email.invalid && email.touched" class="validation-error"><small>This field is Required
+                  </small></div>
+              </div>
+              <div class="form-group col-12 ">
+                  <label>Password</label>
+                  <input type="password" class="form-control mt-2" name="password" #password="ngModel" [ngModel]="loginData?.password" required>
+                  <div *ngIf="password.invalid && password.touched" class="validation-error"><small>This field is Required
+                    </small></div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-success mt-5 mb-5 btn-md login-button"> Submit</button>
+                </div>
+            </form>
+   
+      </div>
+
+    </div>
   </div>
+      <ngx-spinner
+      bdOpacity = 0.9
+      bdColor = "#333"
+      size = "medium"
+      color = "#fff"
+      type = "ball-climbing-dot"
+      [fullScreen] = "true"
+      >
+      <p style="color: white" > Logging In Please Wait ... </p>
+      </ngx-spinner>
 </div>

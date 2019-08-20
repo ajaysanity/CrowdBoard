@@ -16,3 +16,41 @@
   padding-top: 10px;
   text-align: center;
 }
+.main-logo{
+  height: 200px;
+  width: auto;
+}
+.main-page{
+  background-color: #23252E;
+  height: 100%;
+}
+label{
+  color: white;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; 
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; 
+}
+.ng-untouched{
+  border-left: none !important;
+}
+.validation-error{
+  color:#9F3B3A;
+}
+.form-control{
+  max-width:30vw;
+  min-width: 300px;
+}
+.login-button{
+  max-width:30vw;
+  opacity: 0.9;
+  min-width: 300px;
+
+}
+h5{
+  color: white;
+}

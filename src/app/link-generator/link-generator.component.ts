@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import * as uuid from 'uuid';
 import { Validators, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-link-generator',
@@ -36,9 +38,12 @@ export class LinkGeneratorComponent implements OnInit {
 
   constructor(
     private db: AngularFirestore,
+    public auth: QrService,
     public formBuilder: FormBuilder,
     public qrService: QrService,
-    public http: HttpClient) {
+    public afAuth: AngularFireAuth,
+    public http: HttpClient,
+    private router: Router) {
     this.form = this.formBuilder.group({
       nooflinks: ['', Validators.compose([Validators.required, Validators.min(1)])],
     });
@@ -48,10 +53,16 @@ export class LinkGeneratorComponent implements OnInit {
     let FormValue = form.value;
     let counter = FormValue.QrQuantity
     if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null) {
-      for (let i=0; i<= counter; i++ ){
-        this.qrService.httpCreateTable(form)
+      try{
+        for (let i=0; i<= counter; i++ ){
+          this.qrService.httpCreateTable(form)
+        }
+      }catch(err){
+
+      }finally{
         this.qrService.SuccessToast("Success", `${FormValue.QrQuantity} Successfully Added`)
       }
+
     } else if (FormValue.QrQuantity < 1) {
       this.qrService.FailedToast("Failed", "Invalid Number")
     } else {
@@ -59,8 +70,16 @@ export class LinkGeneratorComponent implements OnInit {
     }
 
   }
+  logOut(){
+    this.afAuth.auth.signOut().then( () => {
+      this.auth.CreateSpinner();
 
-
+    this.router.navigateByUrl('/')
+    })
+  }
+  goToDashboard(){
+    this.router.navigateByUrl('/dashboard')
+  }
   formHammer(form?: NgForm) {
     form.resetForm()
     this.QrData = {

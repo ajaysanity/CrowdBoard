@@ -82,15 +82,18 @@
               </small></div>
 
           </div>
-          <button class="btn btn-dark w-75 mt-5 mb-5 btn-md generate-button"> Generate</button>
+          <button class="btn btn-dark w-75 mt-5 btn-md generate-button"> Generate</button>
         </form>
 
       </div>
       <div class="bottom-button p-2 mt-auto bd-highlight w-100">
-        <button class="btn btn-danger w-75 mt-5 print" [useExistingCss]="true" printSectionId="printSection"
+        <button class="btn btn-danger w-75 print" [useExistingCss]="true" printSectionId="printSection"
           ngxPrint>PRINT QR</button>
-        <button class="btn btn-outline-dark btn-block mt-5 mb-4 logout">LOGOUT</button>
+          <button class="btn btn-outline-dark btn-block mt-5 mb-4 logout" (click)="goToDashboard()">Dashboard</button>
+
+        <button class="btn btn-outline-dark btn-block mb-4 logout" (click)="logOut()">LOGOUT</button>
       </div>
+      
     </div>
     <!-- qr fields -->
     <div class="col-xs-12 col-sm-9 col-md-12 col-lg-8 qr-area" id="printSection">
@@ -114,3 +117,7 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner bdOpacity=0.9 bdColor="#333" size="medium" color="#fff" type="ball-climbing-dot" [fullScreen]="true">
+  <p style="color: white"> Logging Out Please Wait ... </p>
+</ngx-spinner>
