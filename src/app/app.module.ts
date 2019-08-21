@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +24,7 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN } from '@angular/fire/functions';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -55,9 +55,7 @@ import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN } from '@angular/fire/func
     QRCodeModule,
     NgxSpinnerModule
   ],
-  providers: [QrService, AngularFireAuth, AngularFireAuthGuard,
-     { provide: FUNCTIONS_ORIGIN, useValue: 'https://us-central1-crowdconnect2.cloudfunctions.net' }
-  ],
+  providers: [QrService, AngularFireAuth, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

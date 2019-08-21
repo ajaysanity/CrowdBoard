@@ -54,7 +54,7 @@ export class LinkGeneratorComponent implements OnInit {
     let counter = FormValue.QrQuantity
     if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null) {
       try{
-        for (let i=0; i<= counter; i++ ){
+        for (let i=0; i< counter; i++ ){
           this.qrService.httpCreateTable(form)
         }
       }catch(err){
