@@ -55,7 +55,16 @@ export class LinkGeneratorComponent implements OnInit {
     if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null) {
       try{
         for (let i=0; i< counter; i++ ){
-          this.qrService.httpCreateTable(form)
+
+          this.qrService.httpCreateTable(form).subscribe( (res: any) => {
+            //response from the server
+            // console.log(res.id)
+
+            this.qr_codes.push(FormValue.urlPrefix+"/"+res.id)
+          }), err => {
+            this.qrService.FailedToast("Failed", `${form.value.QrQuantity} links was not added`)
+          }
+
         }
       }catch(err){
 
