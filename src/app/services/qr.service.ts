@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { TableInfo } from 'src/models/TableInfo.model';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
