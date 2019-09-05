@@ -96,7 +96,7 @@
       
     </div>
     <!-- qr fields -->
-    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-8 qr-area" id="printSection">
+    <div class="col-xs-12 col-sm-9 col-md-12 col-lg-8 qr-area" id="printSection" style="padding-top: 20px;">
       <div class="d-flex flex-wrap justify-content-center flex-column pr-2">
         <!-- <ng-container>
           <div class="card qr-card mt-5 ml-4">
@@ -109,6 +109,7 @@
           </div>
         </ng-container> -->
         <ng-container *ngFor="let data of qr_codes">
+          <qrcode [qrdata]="data" [level]="'M'"></qrcode>
           <h6>{{data}}</h6>
         </ng-container>
       </div>
