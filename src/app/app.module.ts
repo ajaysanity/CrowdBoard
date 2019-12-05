@@ -26,6 +26,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
+
+import {MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
     ToastrModule,
     CommonModule,
     FormsModule,
+    MatTableModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
     HttpClientModule,
