@@ -1,3 +1,4 @@
+import { HttpService } from './services/http.service';
 import { QrService } from './services/qr.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -59,7 +60,7 @@ import {MatTableModule} from '@angular/material/table';
     QRCodeModule,
     NgxSpinnerModule
   ],
-  providers: [QrService, AngularFireAuth, AngularFireAuthGuard],
+  providers: [QrService, AngularFireAuth, AngularFireAuthGuard, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

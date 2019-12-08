@@ -1,0 +1,57 @@
+table {
+    margin-top: 5vh;
+    width: 100%;
+  }
+  
+  tr.detail-row {
+    height: 0;
+  }
+  
+  tr.my-row:not(.expanded-row):hover {
+    background: #777;
+  }
+  
+  tr.my-row:not(.expanded-row):active {
+    background: #efefef;
+  }
+  
+  .my-row td {
+    border-bottom-width: 0;
+  }
+  
+  .main-container {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .info-container {
+    min-width: 90vw;
+    border-top: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  .main-header{
+    font-size: 3vh;
+    font-weight: bold;
+    line-height: normal;
+    padding-right: 15px;
+    margin-bottom: 15px;
+  }
+  .name-container, .email-container{
+    font-size: 1rem;
+  }
+  .text-approved{
+    color:green;
+    margin:0;
+    padding:0;
+  }
+
+ .text-pending{
+  color:red;
+  margin:0;
+  padding:0;
+ }
+  
+  
