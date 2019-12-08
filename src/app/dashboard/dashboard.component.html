@@ -19,79 +19,102 @@
   </div> -->
 
 
-  <table mat-table
-       [dataSource]="AdminModel" multiTemplateDataRows
-       class="mat-elevation-z8">
-  <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of columnHeader">
+  <table mat-table [dataSource]="AdminModel" multiTemplateDataRows class="mat-elevation-z8">
+    <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of columnHeader">
             <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
             <td mat-cell *matCellDef="let admin"> {{admin[column]}} </td>
 
 
   </ng-container> -->
-  <ng-container matColumnDef="name">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let admin">{{admin['name']}}</td>
-</ng-container>
-<ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef> Location </th>
-    <td mat-cell *matCellDef="let admin">{{admin['location']}}</td>
-</ng-container>
-<ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef> Phone </th>
-    <td mat-cell *matCellDef="let admin">{{admin['phone']}}</td>
-</ng-container>
-<ng-container matColumnDef="zipcode">
-    <th mat-header-cell *matHeaderCellDef> Zipcode </th>
-    <td mat-cell *matCellDef="let admin">{{admin['zipcode']}}</td>
-</ng-container>
-<ng-container matColumnDef="approved">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let admin">
-      <ng-container class="text-approved" *ngIf="admin.approved == true; else ElseBlock">
-        <label class="text-approved">Approved</label>
-      </ng-container>
-      <ng-template #ElseBlock>
-          <label class="text-pending">Pending</label>
-      </ng-template>    
-    </td>
-</ng-container>
-<ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let admin">
-      <ng-container class="text-approved" *ngIf="admin.approved == true; else ElseBlock">
+    </ng-container>
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Location </th>
+      <td mat-cell *matCellDef="let admin">{{admin['location']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let admin">{{admin['phone']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="zipcode">
+      <th mat-header-cell *matHeaderCellDef> Zipcode </th>
+      <td mat-cell *matCellDef="let admin">{{admin['zipcode']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="approved">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let admin">
+        <ng-container class="text-approved" *ngIf="admin.approved == 'Approved'; else ElseBlock">
+          <label class="text-approved">Approved</label>
+        </ng-container>
+        <ng-template #ElseBlock>
+          <label class="text-pending" *ngIf="admin.approved == 'Pending'; else ElseIfBlock">Pending</label>
+        </ng-template>
+        <ng-template #ElseIfBlock>
+          <label class="text-denied" *ngIf="admin.approved == 'Denied'; else ElseIfsBlock">Denied</label>
+        </ng-template>
+        <ng-template #ElseIfsBlock>
+            <label class="text-postpone">Postponed</label>
+          </ng-template>
+      </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let admin">
+        <ng-container class="text-approved" *ngIf="admin.approved === 'Approved'">
           <button type="button" class="btn-sm btn-block m-2 btn-warning text-white w-50">Remove</button>
-      </ng-container>
-      <ng-template #ElseBlock>
-        <button type="button" class="btn-sm m-2 btn-success">Accept</button>
-        <button type="button" class="btn-sm m-2 btn-danger w-25">Deny</button>
-      </ng-template>    
-    </td>
-</ng-container>
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let admin" [attr.colspan]="columnHeader.length">
-      <div class="main-container"
-           [@detailExpand]="admin == expanded ? 'expanded' : 'collapsed'">
-        <div class="info-container">
-        <div class="main-header">Owner Information</div>
-          <div class="name-container"> Name:  {{admin.firstName | titlecase}} {{admin.lastName | titlecase}} </div>
-          <div class="email-container"> Email:  {{admin.email}} </div>
+        </ng-container>
+        <ng-container *ngIf="admin.approved === 'Pending'; else ElseIfBlock">
+          <button type="button" class="btn-sm m-2 btn-success" (click)="admin.id">Accept</button>
+          <button type="button" class="btn-sm m-2 btn-danger w-25">Deny</button>
+        </ng-container>
+        <ng-template #ElseIfBlock>
+
+        </ng-template>
+      </td>
+    </ng-container> -->
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let admin" [attr.colspan]="columnHeader.length">
+        <div class="main-container" [@detailExpand]="admin == expanded ? 'expanded' : 'collapsed'">
+          <div class="info-container">
+            <div class="row">
+              <div class="col-6">
+                <div class="main-header">Owner Information</div>
+                <div class="name-container"> Name: {{admin.firstName | titlecase}} {{admin.lastName | titlecase}} </div>
+                <div class="email-container"> Email: {{admin.email}} </div>
+              </div>
+              <div class="col-6">
+                <div class="main-header">Actions</div>
+                <ng-container class="text-approved" *ngIf="admin.approved === 'Approved'">
+                    <button type="button" class="btn-sm m-2 btn-info w-25">Add Packages</button>
+                    <button type="button" class="btn-sm m-2 btn-warning text-white w-25"(click)="postponeLocation(admin.id, admin.name)">Postpone</button>
+                  </ng-container>
+                  <ng-container *ngIf="admin.approved === 'Pending'; else ElseIfBlock">
+                    <button type="button" class="btn-sm m-2 btn-success w-25" (click)="acceptLocation(admin.id, admin.name)">Accept</button>
+                    <button type="button" class="btn-sm m-2 btn-danger w-25"(click)="denyLocation(admin.id, admin.name)">Deny</button>
+
+                  </ng-container>
+                  <ng-template #ElseIfBlock>
+          
+                  </ng-template>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </td>
-  </ng-container>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnHeader"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnHeader;"
-      class="my-row"
-      [class.expanded-row]="expanded === element"
-      (click)="expanded = expanded === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="columnHeader"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnHeader;" class="my-row"
+      [class.expanded-row]="expanded === element" (click)="expanded = expanded === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
 
 
-<!-- <table mat-table [dataSource]="data" class="mat-elevation-z8"> 
+  <!-- <table mat-table [dataSource]="data" class="mat-elevation-z8"> 
         <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef> No. </th>
                 <td mat-cell *matCellDef="let mydata"> {{mydata.Name}} </td>

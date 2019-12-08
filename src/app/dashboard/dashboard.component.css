@@ -25,7 +25,7 @@ table {
   }
   
   .info-container {
-    min-width: 90vw;
+    min-width: 100vw;
     border-top: 2px solid black;
     padding: 8px;
     font-weight: lighter;
@@ -53,5 +53,16 @@ table {
   margin:0;
   padding:0;
  }
-  
+  .text-denied{
+    color:gray;
+    text-decoration: line-through;
+    margin:0;
+    padding:0;
+  }
+  .text-postpone{
+    color:goldenrod;
+    text-decoration: line-through;
+    margin:0;
+    padding:0;
+  }
   

@@ -31,7 +31,7 @@ export interface staticModel{
 export class DashboardComponent implements OnInit {
   loginData: authInfo;
   AdminModel: AdminModel
-  columnHeader = ['name','location','phone', 'zipcode','approved','actions'];
+  columnHeader = ['name','location','phone', 'zipcode','approved'];
   expanded: staticModel | null;
 
 
@@ -57,8 +57,35 @@ getData(){
   let x = 0;
   this.api.getTableData().toPromise().then( (result: AdminModel) => {
     this.AdminModel = result as AdminModel;
+    console.log(this.AdminModel)
     // adminObj.push(this.AdminModel);
   })
+}
 
+async acceptLocation(locationId: any, locationName: any){
+  await this.api.updateStatus(locationId, 'Approved').then(result => {
+    this.auth.SuccessToast('Success!',`${locationName} is Now Approved!`)
+    this.getData();
+  }).catch(err => {
+    this.auth.FailedToast('Failed', 'Something Went Wrong!')
+  })
+}
+
+async denyLocation(locationId: any, locationName: any){
+  await this.api.updateStatus(locationId, 'Denied').then(result => {
+    this.auth.SuccessToast('Success!',`${locationName} is Now Denied!`)
+    this.getData();
+  }).catch(err => {
+    this.auth.FailedToast('Failed', 'Something Went Wrong!')
+  })
+}
+
+async postponeLocation(locationId: any, locationName: any){
+  await this.api.updateStatus(locationId, 'Postpone').then(result => {
+    this.auth.SuccessToast('Success!',`${locationName} is Now Postponed!`)
+    this.getData();
+  }).catch(err => {
+    this.auth.FailedToast('Failed', 'Something Went Wrong!')
+  })
 }
 }
