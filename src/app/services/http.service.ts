@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { reject } from 'q';
+import {MatSort} from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'

@@ -26,6 +26,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 import {MatTableModule} from '@angular/material/table';
@@ -44,6 +45,7 @@ import {MatTableModule} from '@angular/material/table';
     CommonModule,
     FormsModule,
     MatTableModule,
+    MatFormFieldModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
     HttpClientModule,

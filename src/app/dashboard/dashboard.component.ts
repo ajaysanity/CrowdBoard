@@ -1,12 +1,14 @@
 import { HttpService } from './../services/http.service';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { authInfo } from 'src/models/auth.model';
 import { QrService } from '../services/qr.service';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Router } from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { AdminModel } from 'src/models/admin.model';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 export interface staticModel{
   Name: string,
@@ -30,15 +32,19 @@ export interface staticModel{
 })
 export class DashboardComponent implements OnInit {
   loginData: authInfo;
-  AdminModel: AdminModel
+  AdminModel: any;
+  data: any
   columnHeader = ['name','location','phone', 'zipcode','approved'];
   expanded: staticModel | null;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: any;
+  constructor(public auth: QrService,public FireFunctions: AngularFireFunctions,private router: Router, private api: HttpService) { 
+    
+  }
 
+  async ngOnInit() {
+  this.getData()
 
-  constructor(public auth: QrService,public FireFunctions: AngularFireFunctions,private router: Router, private api: HttpService) { }
-
-  ngOnInit() {
-    this.getData()
   }
 makeAdmin(form: NgForm){
 let adminEmail = form.value.email
@@ -50,16 +56,16 @@ addAdminRole({email: adminEmail}).subscribe( res => {
 goToLink(){
   this.router.navigateByUrl('linkgenerator')
 }
-
+applyFilter(filterValue: string) {
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
 getData(){
-  let adminObj = [];
-  let obj = [];
-  let x = 0;
-  this.api.getTableData().toPromise().then( (result: AdminModel) => {
-    this.AdminModel = result as AdminModel;
-    console.log(this.AdminModel)
-    // adminObj.push(this.AdminModel);
-  })
+    this.api.getTableData().toPromise().then((result: AdminModel) => {
+      this.AdminModel = result as AdminModel;
+      this.dataSource = new MatTableDataSource(this.AdminModel);
+      this.dataSource.sort = this.sort;   
+     })
+ 
 }
 
 async acceptLocation(locationId: any, locationName: any){
