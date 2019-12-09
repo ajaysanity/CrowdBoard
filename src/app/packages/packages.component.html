@@ -1,0 +1,34 @@
+
+<div class="row">
+  <div class="col-6">
+    <div class="container-package">
+      <h5>Available Packages</h5>
+      <div
+        cdkDropList
+        #packageList="cdkDropList"
+        [cdkDropListData]="listPackages"
+        [cdkDropListConnectedTo]="[myPackageList]"
+        class="main-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="main-box" *ngFor="let item of listPackages" cdkDrag>{{item.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+
+    <div class="container-package">
+      <h5>Padis Packages</h5>
+    
+      <div
+        cdkDropList
+        #myPackageList="cdkDropList"
+        [cdkDropListData]="myPackage"
+        [cdkDropListConnectedTo]="[packageList]"
+        class="main-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="main-box" *ngFor="let item of myPackage" cdkDrag>{{item.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

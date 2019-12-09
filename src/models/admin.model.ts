@@ -11,3 +11,8 @@ ownerId: string,
 phone:string,
 zipcode: string
 }
+
+export interface PackageModel{
+    id:string,
+    name: string
+}

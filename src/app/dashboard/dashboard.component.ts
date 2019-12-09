@@ -1,3 +1,4 @@
+import { PackagesComponent } from './../packages/packages.component';
 import { HttpService } from './../services/http.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -9,6 +10,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { AdminModel } from 'src/models/admin.model';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface staticModel{
   Name: string,
@@ -38,7 +40,10 @@ export class DashboardComponent implements OnInit {
   expanded: staticModel | null;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: any;
-  constructor(public auth: QrService,public FireFunctions: AngularFireFunctions,private router: Router, private api: HttpService) { 
+  constructor(public auth: QrService,
+    private dialog: MatDialog,
+    public FireFunctions: AngularFireFunctions,
+    private router: Router, private api: HttpService) { 
     
   }
 
@@ -93,5 +98,11 @@ async postponeLocation(locationId: any, locationName: any){
   }).catch(err => {
     this.auth.FailedToast('Failed', 'Something Went Wrong!')
   })
+}
+
+openPackages(): void{
+const dialogRef = this.dialog.open(PackagesComponent,{
+  width: '95vw'
+})
 }
 }

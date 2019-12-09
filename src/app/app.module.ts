@@ -10,7 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { environment } from '../environments/environment.prod';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,13 +30,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 import {MatTableModule} from '@angular/material/table';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { PackagesComponent } from './packages/packages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LinkGeneratorComponent,
-    DashboardComponent
+    DashboardComponent,
+    PackagesComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,8 @@ import {MatTableModule} from '@angular/material/table';
     AngularFireAuthModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DragDropModule,
+    MatDialogModule,
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -63,6 +68,7 @@ import {MatTableModule} from '@angular/material/table';
     NgxSpinnerModule
   ],
   providers: [QrService, AngularFireAuth, AngularFireAuthGuard, HttpService],
+  entryComponents:[PackagesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

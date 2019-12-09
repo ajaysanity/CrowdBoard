@@ -84,7 +84,7 @@
               <div class="col-6">
                 <div class="main-header">Actions</div>
                 <ng-container class="text-approved" *ngIf="admin.approved === 'Approved'">
-                    <button type="button" class="btn-sm m-2 btn-info w-25">Add Packages</button>
+                    <button type="button" class="btn-sm m-2 btn-info w-25" (click)="openPackages()">Add Packages</button>
                     <button type="button" class="btn-sm m-2 btn-warning text-white w-25"(click)="postponeLocation(admin.id, admin.name)">Postpone</button>
                   </ng-container>
                   <ng-container *ngIf="admin.approved === 'Pending'; else ElseIfBlock">
