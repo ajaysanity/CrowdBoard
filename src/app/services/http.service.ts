@@ -30,9 +30,37 @@ export class HttpService {
     })
 
   }
-  getPackages() {
+  getPackages(locationId) {
     return new Promise((resolve, reject) => {
-      this.http.get(`${this.uri}/packages`).pipe(takeUntil(this.unsub)).subscribe(res => {
+      this.http.get(`${this.uri}/packages?locationId=${locationId}`).pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res)
+      })
+    }).catch(err => {
+      reject(err.message)
+    })
+  }
+  getMyPackages(locationId){
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.uri}/mypackages?locationId=${locationId}`).pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res)
+      })
+    }).catch(err => {
+      reject(err.message)
+    })
+  }
+
+  deleteMyPackage(locationId: any, packageId: any){
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${this.uri}/packages?locationId=${locationId}&packageId=${packageId}`).pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res)
+      })
+    }).catch(err => {
+      reject(err.message)
+    })
+  }
+  updateMyPackage(data: any){
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.uri}/packages`,data).pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res)
       })
     }).catch(err => {

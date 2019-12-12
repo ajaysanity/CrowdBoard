@@ -9,8 +9,8 @@
         [cdkDropListData]="listPackages"
         [cdkDropListConnectedTo]="[myPackageList]"
         class="main-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="main-box" *ngFor="let item of listPackages" cdkDrag>{{item.name}}</div>
+        (cdkDropListDropped)="drop($event, 'packages',listPackages)">
+        <div class="main-box" *ngFor="let item of listPackages" cdkDragData cdkDrag>{{item.name}}</div>
       </div>
     </div>
   </div>
@@ -19,14 +19,14 @@
     <div class="container-package">
       <h6>{{this.data.name}} Packages</h6>
     
-      <div
+      <div 
         cdkDropList
         #myPackageList="cdkDropList"
         [cdkDropListData]="myPackage"
         [cdkDropListConnectedTo]="[packageList]"
-        class="main-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="main-box" *ngFor="let item of myPackage" cdkDrag>{{item.name}}</div>
+        class="main-list"       
+        (cdkDropListDropped)="drop($event, 'myPackages',myPackage)">
+        <div class="main-box" *ngFor="let item of myPackage" cdkDragData cdkDrag>{{item.name}}</div>
       </div>
     </div>
   </div>

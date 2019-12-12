@@ -87,13 +87,13 @@
                     <button type="button" class="btn-sm m-2 btn-info w-25" (click)="openPackages(admin.name, admin.id)">Add Packages</button>
                     <button type="button" class="btn-sm m-2 btn-warning text-white w-25"(click)="postponeLocation(admin.id, admin.name)">Postpone</button>
                   </ng-container>
-                  <ng-container *ngIf="admin.approved === 'Pending'; else ElseIfBlock">
+                  <ng-container *ngIf="admin.approved === 'Pending'; else ElseBlock">
                     <button type="button" class="btn-sm m-2 btn-success w-25" (click)="acceptLocation(admin.id, admin.name)">Accept</button>
                     <button type="button" class="btn-sm m-2 btn-danger w-25"(click)="denyLocation(admin.id, admin.name)">Deny</button>
 
                   </ng-container>
-                  <ng-template #ElseIfBlock>
-                                  <button type="button" class="btn-sm m-2 btn-success w-25" (click)="acceptLocation(admin.id, admin.name)">Accept</button>
+                  <ng-template #ElseBlock>
+                                  <button *ngIf="admin.approved !== 'Approved'" type="button" class="btn-sm m-2 btn-success w-25" (click)="acceptLocation(admin.id, admin.name)">Accept</button>
                   </ng-template>
               </div>
             </div>

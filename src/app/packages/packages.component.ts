@@ -1,3 +1,4 @@
+import { QrService } from './../services/qr.service';
 import { HttpService } from './../services/http.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { PackageModel } from 'src/models/admin.model';
@@ -13,35 +14,64 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 export class PackagesComponent implements OnInit {
   listPackages: any
   myPackage: any;
-  constructor(private api: HttpService,   public dialogRef: MatDialogRef<DashboardComponent>,
+  constructor(private api: HttpService,   public dialogRef: MatDialogRef<DashboardComponent>,private alert: QrService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     console.log(this.data)
     this.getPackagesData();
+    this.getMyPackagesData();
   }
 async getPackagesData(){
-  this.api.getPackages().then( data => {
+  this.api.getPackages(this.data.id).then( data => {
     this.listPackages = data
-    this.myPackage = [];
   })
 }
-drop(event: CdkDragDrop<string[]>) {
+async getMyPackagesData(){
+  this.api.getMyPackages(this.data.id).then(data =>{
+    this.myPackage = data
+  })
+}
+drop(event: CdkDragDrop<string[]>, packageType: any) {
+  let i = 0
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    console.log(event.container.data)
   } else {
     transferArrayItem(event.previousContainer.data,
                       event.container.data,
                       event.previousIndex,
                       event.currentIndex);
-                      this.updateMyPackage(event.container.data)
+                      if(packageType === 'packages'){
+                        console.log(event.previousContainer.data)
+                        this.deleteMyPackage(event.container.data)
+
+                      }else{
+                         this.updateMyPackage(event.container.data)
+
+                      }
+
   }
 }
 
 updateMyPackage(data:any){
   let packageId = data[0].id
-  console.log(data[0])
+  let name = data[0].name
+  let locationId = this.data.id
+  let datum ={
+    packageId: packageId,
+    name: name,
+    locationId: locationId
+  }
+  this.api.updateMyPackage(datum).then( (res:any) => this.alert.SuccessToast('Success!', res.message))
+  .catch( (err:any) => this.alert.FailedToast('Failed', err.message))
+}
 
+deleteMyPackage(data:any){
+  let packageId = data[0].id
+  let locationId = this.data.id
+
+  this.api.deleteMyPackage(locationId,packageId).then( (res:any) => this.alert.SuccessToast('Success!', res.message))
+  .catch( (err:any) => this.alert.FailedToast('Failed', err.message))
+  
 }
 }
