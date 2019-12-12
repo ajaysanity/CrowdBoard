@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   signInMessage: string = '';
   form: FormGroup;
   loginData: authInfo;
+  bar: false;
   validation_messages = {
     'username': [{ type: 'required', message: 'Required.' }],
     'password': [{ type: 'required', message: 'Required.' }],
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bar = false;
   }
 
   async onSignin(form: NgForm) {

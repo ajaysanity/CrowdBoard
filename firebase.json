@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/qrlinkgenerator",
+    "site": "crowdboard",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
