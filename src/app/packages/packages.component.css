@@ -52,3 +52,18 @@
   .example-list.cdk-drop-list-dragging .main-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
+  
+  .container-header{
+    height: 5vh;
+    background-color: #33C397;
+    margin: 0;
+    padding:0;
+    color:white;
+  }
+  .my-title{
+    line-height: 5vh;
+    width: 100vw
+  }
+  .content-packages{
+    padding: 30px !important;
+  }

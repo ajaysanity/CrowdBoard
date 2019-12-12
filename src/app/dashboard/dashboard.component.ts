@@ -103,7 +103,9 @@ async postponeLocation(locationId: any, locationName: any){
 openPackages(name, locationId): void{
 const dialogRef = this.dialog.open(PackagesComponent,{
   width: '95vw',
-  data:{name: name, id: locationId}
+  data:{name: name, id: locationId},
+  panelClass: 'dialog-packages'
+
 })
 }
 }

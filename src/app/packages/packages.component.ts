@@ -32,6 +32,10 @@ async getMyPackagesData(){
     this.myPackage = data
   })
 }
+closePackages(){
+  this.dialogRef.close();
+
+}
 drop(event: CdkDragDrop<string[]>, packageType: any) {
   let i = 0
   if (event.previousContainer === event.container) {
@@ -41,20 +45,21 @@ drop(event: CdkDragDrop<string[]>, packageType: any) {
                       event.container.data,
                       event.previousIndex,
                       event.currentIndex);
+                      let position = event.currentIndex
                       if(packageType === 'packages'){
-                        console.log(event.previousContainer.data)
-                        this.deleteMyPackage(event.container.data)
+                        console.log(event.currentIndex)
+                        this.deleteMyPackage(event.container.data,position)
 
                       }else{
-                         this.updateMyPackage(event.container.data)
+                         this.updateMyPackage(event.container.data, position)
 
                       }
 
   }
 }
 
-updateMyPackage(data:any){
-  let packageId = data[0].id
+updateMyPackage(data:any, position: any){
+  let packageId = data[position].id
   let name = data[0].name
   let locationId = this.data.id
   let datum ={
@@ -66,8 +71,8 @@ updateMyPackage(data:any){
   .catch( (err:any) => this.alert.FailedToast('Failed', err.message))
 }
 
-deleteMyPackage(data:any){
-  let packageId = data[0].id
+deleteMyPackage(data:any, position: any){
+  let packageId = data[position].id
   let locationId = this.data.id
 
   this.api.deleteMyPackage(locationId,packageId).then( (res:any) => this.alert.SuccessToast('Success!', res.message))
