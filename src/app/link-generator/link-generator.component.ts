@@ -17,7 +17,7 @@ export class LinkGeneratorComponent implements OnInit {
   ngOnInit() {
 
   }
-  CollectionType: any[] = ["_qr_table"];
+  CollectionType: any[] = ["Location","Table"];
   QrData = this.qrService.QrFormData;
   prefix = "";
   nooflinks = 1;
@@ -26,6 +26,7 @@ export class LinkGeneratorComponent implements OnInit {
   locationqrcodes: Observable<any[]>;
   collection = "";
   qr_codes = []
+  datum = []
   level = "M";
   form: FormGroup;
   mainCode: string;
@@ -51,22 +52,35 @@ export class LinkGeneratorComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let FormValue = form.value;
-    let counter = FormValue.QrQuantity
-    if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null) {
+    let formCategory = FormValue.Type
+    let counter = FormValue.QrQuantity;
+    let data = {
+      urlPrefix: FormValue.urlPrefix
+    }
+    if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null && formCategory !=null) {
       try{
         for (let i=0; i< counter; i++ ){
-
-          this.qrService.httpCreateTable(form).subscribe( (res: any) => {
-            //response from the server
-            // console.log(res.id)
-
-            this.qr_codes.push(FormValue.urlPrefix+"/"+res.id)
-          }), err => {
-            this.qrService.FailedToast("Failed", `${form.value.QrQuantity} links was not added`)
+          if(formCategory = "Location"){
+            this.db.collection('Link_Generator_QR/Raw_Links/Location_Links').add(data).then( result => {
+              this.datum.push(`${FormValue.urlPrefix}/${result.id}`)
+            })
+          }else{
+            this.db.collection('Link_Generator_QR/Raw_Links/Table_Links').add(data).then( result => {
+              this.datum.push(`${FormValue.urlPrefix}/${result.id}`)
+            })
           }
 
+          // this.qrService.httpCreateTable(form).subscribe( (res: any) => {
+          //   //response from the server
+          //   // console.log(res.id)
+
+          //   // this.qr_codes.push(FormValue.urlPrefix+"/"+res.id)
+          // }), err => {
+          //   this.qrService.FailedToast("Failed", `${form.value.QrQuantity} links was not added`)
+          // }
         }
       }catch(err){
+        this.qrService.FailedToast("Failed", "Something Went Wrong")
 
       }finally{
         this.qrService.SuccessToast("Success", `${FormValue.QrQuantity} Successfully Added`)
