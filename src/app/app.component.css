@@ -13,3 +13,7 @@
     color: #33C397;
 }
 
+.container-fluid{
+    overflow-y:auto !important;
+    padding:0;
+}
