@@ -68,8 +68,9 @@ table {
     margin:0;
     padding:0;
   }
-  .dialog-packages .mat-dialog-container { 
-    padding: 0 !important;
-    overflow: hidden;
+
+  .container-fluid{
+    margin-top: 10vh;
   }
+ 
   

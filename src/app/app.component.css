@@ -1,0 +1,15 @@
+.main-nav{
+    background-color: #272934;
+    color: white;
+    text-decoration: none;
+
+}
+.main-nav  a{
+    color:white;
+}
+
+
+.navbar .active a {
+    color: #33C397;
+}
+

@@ -48,14 +48,14 @@
 </mat-list> -->
 
 <!-- container -->
-<div class="container-fluid">
+<div class="container-fluid mt-5 over">
   <div class="row">
     <!-- sidebar -->
     <div
       class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mysidebar justify-items-center d-flex align-items-center flex-column bd-highlight text-center position-sticky">
-      <img src="../assets/crowd-connect.png" class="logo">
+      <!-- <img src="../assets/crowd-connect.png" class="logo">
       <small>Crowd Connect</small>
-      <h5>QR Generator</h5>
+      <h5>QR Generator</h5> -->
       <div class="row d-flex h-100 justify-content-center ">
 
         <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
@@ -87,9 +87,9 @@
 
       </div>
       <div class="bottom-button p-2 mt-auto bd-highlight w-100">
-        <button class="btn btn-danger w-75 print" [useExistingCss]="true" printSectionId="printSection"
+        <button class="btn btn-danger w-75 mb-5 print" [useExistingCss]="true" printSectionId="printSection"
           ngxPrint>PRINT QR</button>
-          <button class="btn btn-outline-dark btn-block mt-5 mb-4 logout" (click)="goToDashboard()">Dashboard</button>
+          <!-- <button class="btn btn-outline-dark btn-block mt-5 mb-4 logout" (click)="goToDashboard()">Dashboard</button> -->
 
         <button class="btn btn-outline-dark btn-block mb-4 logout" (click)="logOut()">LOGOUT</button>
       </div>
