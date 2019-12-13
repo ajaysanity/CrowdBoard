@@ -10,8 +10,7 @@
     </div>
     <div class="col-12 d-flex flex-wrap mt-5 justify-content-center">
       <button type="button" class="btn btn-lg btn-success mr-4" (click)="this.decider(data.locationId, data.locationName, data.type)"> {{data.type}}</button>
-      <button type="button" class="btn btn-lg btn-danger ml-4" (click)="this.closeDialog()"> Cancel</button>
-
+      <button type="button" class="btn btn-lg btn-danger ml-4" (click)="this.closeDialog('failed')"> Cancel</button>
     </div>
   </div>
 </div>

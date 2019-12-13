@@ -14,5 +14,7 @@ zipcode: string
 
 export interface PackageModel{
     id:string,
-    name: string
+    name: string,
+    description: string,
+    price: string
 }

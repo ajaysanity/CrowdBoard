@@ -49,6 +49,15 @@ export class HttpService {
     })
   }
 
+  getRawPackages(){
+      return new Promise((resolve, reject) => {
+      this.http.get(`${this.uri}/packages`).pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res)
+      })
+    }).catch(err => {
+      reject(err.message)
+    })  
+  }
   deleteMyPackage(locationId: any, packageId: any){
     return new Promise((resolve, reject) => {
       this.http.delete(`${this.uri}/packages?locationId=${locationId}&packageId=${packageId}`).pipe(takeUntil(this.unsub)).subscribe(res => {
@@ -61,6 +70,16 @@ export class HttpService {
   updateMyPackage(data: any){
     return new Promise((resolve, reject) => {
       this.http.post(`${this.uri}/packages`,data).pipe(takeUntil(this.unsub)).subscribe(res => {
+        resolve(res)
+      })
+    }).catch(err => {
+      reject(err.message)
+    })
+  }
+
+  addRawPackage(data: any){
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.uri}/rawpackage`,data).pipe(takeUntil(this.unsub)).subscribe(res => {
         resolve(res)
       })
     }).catch(err => {

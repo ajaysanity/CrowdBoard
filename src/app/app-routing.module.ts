@@ -1,3 +1,4 @@
+import { OthersComponent } from './others/others.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,7 +27,13 @@ const routes: Routes = [
   component: DashboardComponent, 
   canActivate: [AngularFireAuthGuard], 
   data: { authGuardPipe: redirectUnauthorizedToLogin }
-}  
+},
+{ 
+  path: 'others', 
+  component: OthersComponent, 
+  canActivate: [AngularFireAuthGuard], 
+  data: { authGuardPipe: redirectUnauthorizedToLogin }
+}    
   
 ];
 

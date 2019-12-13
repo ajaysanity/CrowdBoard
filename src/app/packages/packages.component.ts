@@ -1,7 +1,6 @@
 import { QrService } from './../services/qr.service';
 import { HttpService } from './../services/http.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { PackageModel } from 'src/models/admin.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -14,7 +13,8 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 export class PackagesComponent implements OnInit {
   listPackages: any
   myPackage: any;
-  constructor(private api: HttpService,   public dialogRef: MatDialogRef<DashboardComponent>,private alert: QrService,
+  constructor(private api: HttpService,   public dialogRef: MatDialogRef<DashboardComponent>,
+    private alert: QrService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
