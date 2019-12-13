@@ -1,0 +1,10 @@
+.img-alert{
+    height: 10vh;
+    width: auto;
+}
+
+.text-alert{
+    color: #33C397;
+    text-align: center;
+    font-weight: bold;
+}

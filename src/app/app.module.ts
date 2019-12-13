@@ -32,6 +32,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { PackagesComponent } from './packages/packages.component';
+import { AlertComponent } from './alert/alert.component';
+import { OthersComponent } from './others/others.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { PackagesComponent } from './packages/packages.component';
     LoginComponent,
     LinkGeneratorComponent,
     DashboardComponent,
-    PackagesComponent
+    PackagesComponent,
+    AlertComponent,
+    OthersComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,7 @@ import { PackagesComponent } from './packages/packages.component';
     NgxSpinnerModule
   ],
   providers: [QrService, AngularFireAuth, AngularFireAuthGuard, HttpService],
-  entryComponents:[PackagesComponent],
+  entryComponents:[PackagesComponent, AlertComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

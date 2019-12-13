@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <img class="img-alert" src="../../assets/triangle.png">
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+        <h4 class="text-alert" color="red">Do you want to {{data.type}} the {{data.locationName}} Location?</h4>
+    </div>
+    <div class="col-12 d-flex flex-wrap mt-5 justify-content-center">
+      <button type="button" class="btn btn-lg btn-success mr-4" (click)="this.decider(data.locationId, data.locationName, data.type)"> {{data.type}}</button>
+      <button type="button" class="btn btn-lg btn-danger ml-4" (click)="this.closeDialog()"> Cancel</button>
+
+    </div>
+  </div>
+</div>
