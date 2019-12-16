@@ -48,7 +48,7 @@
 </mat-list> -->
 
 <!-- container -->
-<div class="container-fluid mt-5 over">
+<div class="container-fluid mt-5">
   <div class="row">
     <!-- sidebar -->
     <div
@@ -86,9 +86,13 @@
         </form>
 
       </div>
+      <div class="bd-highlight w-100 mt-auto">
+          <mat-checkbox class="check-qr" [(ngModel)]="checked">QR Code</mat-checkbox>
+      </div>
       <div class="bottom-button p-2 mt-auto bd-highlight w-100">
         <button class="btn btn-danger w-75 mb-5 print" [useExistingCss]="true" printSectionId="printSection"
           ngxPrint>PRINT QR</button>
+
           <!-- <button class="btn btn-outline-dark btn-block mt-5 mb-4 logout" (click)="goToDashboard()">Dashboard</button> -->
 
         <button class="btn btn-outline-dark btn-block mb-4 logout" (click)="logOut()">LOGOUT</button>
@@ -96,25 +100,25 @@
       
     </div>
     <!-- qr fields -->
-    <div class="col-xs-12 mt-4 col-sm-9 col-md-12 col-lg-8 qr-area" id="printSection" style="padding-top: 20px;">
-      <div class="d-flex flex-wrap justify-content-center flex-column pr-2">
+    <div class="col-xs-12 mt-3 col-sm-12 col-md-12 col-lg-9 qr-area" id="printSection" style="padding-top: 20px;">
+      <div class="d-flex flex-wrap justify-content-center pr-2" [ngStyle]="checked ? {'flex-direction': 'row'} : {'flex-direction': 'column'} ">
         <ng-container *ngFor="let data of datum">
-          <label>{{data}}</label>
-        </ng-container>
-        <!-- <ng-container>
-          <div class="card qr-card mt-5 ml-4">
-            <div class="card-header bg-danger text-center">
-              <h6>Padis Point</h6>
+          <div class="card qr-card mt-5 ml-4" >
+            <div class="card-header bg-danger text-center h-100">
+                <label>{{data}}</label>
+
             </div>
-            <div class="card-body h-auto p-2">
-              <qrcode qrdata="asdasd" class="qr" [level]="'M'"></qrcode>
+            <div class="card-body h-auto p-2 d-flex m-auto" *ngIf="checked">
+              <qrcode qrdata="data" class="qr" [level]="'M'"></qrcode>
             </div>
           </div>
-        </ng-container> -->
-        <ng-container *ngFor="let data of qr_codes">
-          <qrcode [qrdata]="data" [level]="'M'"></qrcode>
-          <h6>{{data}}</h6>
         </ng-container>
+        <!-- <ng-container *ngFor="let data of datum">
+        
+        </ng-container> -->
+        <!-- <ng-container *ngFor="let data of datum">
+          <qrcode [qrdata]="data" [level]="'M'"></qrcode>
+        </ng-container> -->
       </div>
 
 

@@ -34,6 +34,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { PackagesComponent } from './packages/packages.component';
 import { AlertComponent } from './alert/alert.component';
 import { OthersComponent } from './others/others.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { OthersComponent } from './others/others.component';
     HttpClientModule,
     DragDropModule,
     MatDialogModule,
+    MatCheckboxModule,
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
