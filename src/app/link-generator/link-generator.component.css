@@ -5,7 +5,7 @@
 }
 .container-fluid{
   overflow: hidden !important;
-margin-top: 10vh;
+
 }
 .spacer {
   flex: 1 1 auto;
@@ -19,15 +19,13 @@ margin-top: 10vh;
   min-height: calc(100vh - 48px);
   height: 100% !important;
   overflow: hidden !important;
-  position: fixed;
+
 }
 
 .qr-card{
   color:white;
-  width: auto;
-  padding:0 !important;
-  display: flex;
-  margin: auto;
+  
+
 }
 .logo{
   height: 100px;
@@ -58,8 +56,4 @@ margin-top: 10vh;
 }
 .bottom-button{
   margin-bottom: 15vh !important;
-}
-
-::ng-deep .mat-checkbox .mat-checkbox-frame {
-  border-color: #42A948;
 }

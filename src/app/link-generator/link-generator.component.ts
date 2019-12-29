@@ -30,7 +30,6 @@ export class LinkGeneratorComponent implements OnInit {
   level = "M";
   form: FormGroup;
   mainCode: string;
-  checked: false;
   validation_messages = {
     'nooflinks': [
       { type: 'required', message: 'Number of links is required.' },
@@ -61,7 +60,7 @@ export class LinkGeneratorComponent implements OnInit {
     if (FormValue.QrQuantity != null && FormValue.QrQuantity >= 1 && FormValue.urlPrefix != null && formCategory !=null) {
       try{
         for (let i=0; i< counter; i++ ){
-          if(formCategory === "Location"){
+          if(formCategory = "Location"){
             this.db.collection('Link_Generator_QR/Raw_Links/Location_Links').add(data).then( result => {
               this.datum.push(`${FormValue.urlPrefix}/${result.id}`)
             })

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             if (admin) {
               this.auth.CreateSpinner();
               this.auth.SuccessToast('Success!', 'Welcome to Code Generator')
-              this.router.navigateByUrl('/dashboard');
+              this.router.navigateByUrl('/linkgenerator');
             } else {
               this.auth.FailedToast('Failed', 'Authorized Users Only')
               this.afAuth.auth.signOut();

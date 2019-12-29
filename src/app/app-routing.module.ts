@@ -8,7 +8,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo, hasCustomClaim, canActiva
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const adminOnly = hasCustomClaim('admin');
-const redirectLoggedInToQr= () => redirectLoggedInTo(['dashboard']);
+const redirectLoggedInToQr= () => redirectLoggedInTo(['linkgenerator']);
 
 const routes: Routes = [
   { path: '', component: LoginComponent,
